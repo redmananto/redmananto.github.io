@@ -36,7 +36,7 @@
     p { margin: 5px 0 20px; color: #555; }
 
     ul { list-style: none; padding: 0; margin: 0 0 20px; }
-    ul li { margin: 5px 0; font-size: 1em; color: #555; opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    ul li { margin: 5px 0; font-size: 1em; color: #555; }
 
     img { margin-top: 20px; max-width: 300px; height: auto; border-radius: 8px; }
 
@@ -56,7 +56,7 @@
     }
 
     .arrow.down { bottom: 30px; }
-    .arrow.up { top: 20px; }
+    .arrow.up { top: 20px; } /* removed rotation */
 
     @keyframes float {
       0%, 100% { transform: translateX(-50%) translateY(0); }
@@ -70,12 +70,6 @@
     }
 
     .visible { opacity: 1 !important; transform: translateY(0) !important; }
-
-    /* For list items when section is visible */
-    .list-visible li {
-      opacity: 1;
-      transform: translateY(0);
-    }
 
   </style>
 </head>
@@ -96,7 +90,7 @@
     <p>Network Engineer | Skilled in TCP/IP, OSPF, DHCP, DNS, and Firewalls</p>
 
     <h2>Certifications</h2>
-    <ul id="certifications">
+    <ul>
       <li>CCNA</li>
       <li>CompTIA Security+</li>
       <li>Other Relevant Certifications</li>
@@ -109,7 +103,7 @@
   <!-- === THIRD PAGE === -->
   <section id="projects">
     <h2>Projects</h2>
-    <ul id="project-list">
+    <ul>
       <li>Project 1: Network Security Implementation</li>
       <li>Project 2: Home Lab OSPF Setup</li>
       <li>Project 3: Firewall Configuration & Monitoring</li>
@@ -119,7 +113,7 @@
   </section>
 
   <script>
-    // Smooth scroll for arrows
+    // Smooth scroll for all arrows
     document.querySelectorAll('.arrow').forEach(arrow => {
       arrow.addEventListener('click', () => {
         const targetId = arrow.getAttribute('data-target');
@@ -127,21 +121,11 @@
       });
     });
 
-    // Fade in sections
+    // Fade in sections when visible
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-
-          // Animate list items in this section
-          const lists = entry.target.querySelectorAll('ul');
-          lists.forEach(list => {
-            list.classList.add('list-visible');
-            // Stagger animation for list items
-            list.querySelectorAll('li').forEach((li, index) => {
-              li.style.transitionDelay = ${index * 0.2}s;
-            });
-          });
         }
       });
     }, { threshold: 0.3 });
