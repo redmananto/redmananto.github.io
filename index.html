@@ -5,57 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Website</title>
   <style>
-    body {
+    /* Reset and base setup */
+    html, body {
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* === PAGE 1 === */
+    section {
+      height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: Arial, sans-serif;
-      flex-direction: column;
       text-align: center;
-      background-color: #f0f0f0;
     }
+
+    #home {
+      background-color: #f0f0f0;
+      position: relative;
+    }
+
     h1 {
       margin: 0;
       font-size: 3em;
     }
+
     p {
       margin: 10px 0;
       font-size: 1.2em;
       color: #555;
     }
+
     img {
       margin-top: 20px;
-      max-width: 300px; /* adjust size */
+      max-width: 300px;
       height: auto;
-      border-radius: 8px; /* optional rounded corners */
-    }
-  </style>
-</head>
-<body>
-  <h1>ANTO PAUL</h1>
-  <p>"Network Engineer"</p>
-</body>
-<div class="arrow">&#8595;</div>
-
-  <section id="about">
-    <h2>Qualification</h2>
-    <p>Bachelor’s in Cybersecurity</p>
-
-    <h2>Experience</h2>
-    <p>Network Engineer | Skilled in TCP/IP, OSPF, DHCP, DNS, and Firewalls</p>
-  </section>
-
-  <style>
-    /* Make sure body allows full-page scroll */
-    html, body {
-      scroll-behavior: smooth;
-      height: 100%;
-      overflow-x: hidden;
+      border-radius: 8px;
     }
 
-    /* Arrow at bottom center */
     .arrow {
       position: absolute;
       bottom: 30px;
@@ -73,28 +64,15 @@
       60% { transform: translate(-50%, 5px); }
     }
 
-    /* Parallax fade transition */
-    body {
-      background: linear-gradient(to bottom, #f0f0f0 0%, #ffffff 100%);
-      transition: background 1s ease;
-    }
-
-    /* Second section */
+    /* === PAGE 2 === */
     #about {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       background-color: #ffffff;
       color: #333;
-      font-family: Arial, sans-serif;
       opacity: 0;
       transform: translateY(50px);
-      transition: opacity 1.5s ease, transform 1.5s ease;
+      transition: opacity 1.2s ease, transform 1.2s ease;
     }
 
-    /* When visible */
     #about.visible {
       opacity: 1;
       transform: translateY(0);
@@ -109,26 +87,43 @@
       color: #555;
     }
   </style>
+</head>
+<body>
+
+  <!-- === FIRST PAGE === -->
+  <section id="home">
+    <h1>ANTO PAUL</h1>
+    <p>"Network Engineer"</p>
+    <div class="arrow">&#8595;</div>
+  </section>
+
+  <!-- === SECOND PAGE === -->
+  <section id="about">
+    <h2>Qualification</h2>
+    <p>Bachelor’s in Cybersecurity</p>
+
+    <h2>Experience</h2>
+    <p>Network Engineer | Skilled in TCP/IP, OSPF, DHCP, DNS, and Firewalls</p>
+  </section>
 
   <script>
-    // Smooth scroll when arrow clicked
+    // Smooth scroll when clicking the arrow
     document.querySelector('.arrow').addEventListener('click', () => {
       document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
     });
 
-    // Fade and parallax background transition
+    // Fade in second page when visible
     const aboutSection = document.querySelector('#about');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           aboutSection.classList.add('visible');
-          document.body.style.background = 'linear-gradient(to bottom, #ffffff 0%, #f0f0f0 100%)';
-        } else {
-          document.body.style.background = 'linear-gradient(to bottom, #f0f0f0 0%, #ffffff 100%)';
         }
       });
-    }, { threshold: 0.4 });
+    }, { threshold: 0.3 });
 
     observer.observe(aboutSection);
   </script>
+
+</body>
 </html>
