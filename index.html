@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>antopaul</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Rajdhani:wght@500&display=swap" rel="stylesheet">
-
   <style>
+    /* Reset and base setup */
     html, body {
       margin: 0;
       padding: 0;
@@ -17,6 +15,7 @@
       overflow-x: hidden;
     }
 
+    /* === SECTIONS === */
     section {
       height: 100vh;
       display: flex;
@@ -25,26 +24,14 @@
       align-items: center;
       text-align: center;
       padding: 20px;
-      position: relative;
+      position: relative; /* needed for arrows */
     }
 
     #home { background-color: #f0f0f0; }
     #about { background-color: #ffffff; color: #333; opacity: 0; transform: translateY(50px); transition: opacity 1.2s ease, transform 1.2s ease; }
     #projects { background-color: #e0e0e0; color: #333; opacity: 0; transform: translateY(50px); transition: opacity 1.2s ease, transform 1.2s ease; }
 
-    /* === MAIN HEADING STYLE === */
-    h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 500;
-      font-size: 4em;
-      letter-spacing: 0.5em;
-      background: linear-gradient(45deg, #00f0ff, #ff00ff, #00ff85);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 8px rgba(0,255,255,0.6), 0 0 15px rgba(255,0,255,0.5), 0 0 20px rgba(0,255,133,0.4);
-      margin: 0;
-    }
-
+    h1 { margin: 0; font-size: 3em; }
     h2 { margin: 10px 0 5px; }
     p { margin: 5px 0 20px; color: #555; }
 
@@ -83,17 +70,19 @@
     }
 
     .visible { opacity: 1 !important; transform: translateY(0) !important; }
+
   </style>
 </head>
 <body>
 
-  <!-- FIRST PAGE -->
+  <!-- === FIRST PAGE === -->
   <section id="home">
     <h1>A N T O P A U L</h1>
+    <p></p>
     <div class="arrow down" data-target="about">&#8595;</div>
   </section>
 
-  <!-- SECOND PAGE -->
+  <!-- === SECOND PAGE === -->
   <section id="about">
     <h2>Qualification</h2>
     <p>Bachelor’s in Cybersecurity</p>
@@ -112,7 +101,7 @@
     <div class="arrow down" data-target="projects">&#8595;</div>
   </section>
 
-  <!-- THIRD PAGE -->
+  <!-- === THIRD PAGE === -->
   <section id="projects">
     <h2>Projects</h2>
     <ul>
@@ -125,7 +114,7 @@
   </section>
 
   <script>
-    // Smooth scroll for arrows
+    // Smooth scroll for all arrows
     document.querySelectorAll('.arrow').forEach(arrow => {
       arrow.addEventListener('click', () => {
         const targetId = arrow.getAttribute('data-target');
@@ -133,7 +122,7 @@
       });
     });
 
-    // Fade in sections
+    // Fade in sections when visible
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
